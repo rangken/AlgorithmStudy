@@ -3,4 +3,6 @@ public interface List<E> extends Collection<E> {
   boolean isEmpty();
   boolean add(E e);
   boolean remove(Object o);
+
+  Iterator<E> iterator();
 }

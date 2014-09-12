@@ -1,3 +1,3 @@
-public interface Collection<E> extends Iterable<E> {
+public interface Collection<E> extends java.lang.Iterable<E> {
 
 }
