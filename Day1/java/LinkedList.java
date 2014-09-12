@@ -4,7 +4,8 @@ public class LinkedList<E> implements List<E>{
   transient Node<E> first;
   transient Node<E> last;
 
-
+  public LinkedList() {
+  }
   public E get(int index) {
       return node(index).item;
   }

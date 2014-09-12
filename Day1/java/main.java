@@ -8,8 +8,17 @@ public class main{
     l.add("B");
     l.add("C");
     l.remove("A");
-
+    System.out.println("-----LinkedList-----");
     for(Iterator<String> i = l.iterator(); i.hasNext();){
+        String str = i.next();
+        System.out.println(str);
+    }
+
+    System.out.println("-----ArrayList-----");
+    ArrayList<String> a = new ArrayList<String>();
+    a.add("A");
+    a.add("B");
+    for(Iterator<String> i = a.iterator(); i.hasNext();){
         String str = i.next();
         System.out.println(str);
     }
