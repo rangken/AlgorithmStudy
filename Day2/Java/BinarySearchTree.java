@@ -58,6 +58,28 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     }
     return true;
   }
+  public boolean add2(E data){
+    Node<E> newNode = new Node<E>(data);
+    if(root == null){
+      root = newNode;
+      root.parent = null;
+    }
+    insertNode(root, newNode);
+    return true;
+  }
+  // recursive add
+  private Node<E> insertNode(Node<E> currentParent, Node<E> newNode) {
+
+    if (currentParent == null)
+      return newNode;
+
+    else if (newNode.element.compareTo(currentParent.element) > 0)
+      currentParent.right = insertNode(currentParent.right, newNode);
+    else if (newNode.element.compareTo(currentParent.element) < 0 )
+      currentParent.left = insertNode(currentParent.left, newNode);
+
+    return currentParent;
+  }
   @Override
   public E remove(E data){
     Node<E> removeNode = getNode(data);

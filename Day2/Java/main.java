@@ -82,6 +82,7 @@ public class main{
     bst.add(new Integer(23));
 
     bst.print();
+    System.out.println("제거");
     bst.remove(new Integer(18));
     bst.print();
   }
