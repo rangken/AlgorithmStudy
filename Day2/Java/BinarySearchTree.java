@@ -16,6 +16,15 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     }
     return null;
   }
+  protected Node<E> getRightLeftestNode(Node<E> node){
+    Node<E> tNode = node.right;
+    if(tNode == null)
+      return tNode;
+    while(tNode.left != null){
+      tNode = tNode.left;
+    }
+    return tNode;
+  }
   @Override
   public boolean add(E data){
     Node<E> newNode = new Node<E>(data);
@@ -85,16 +94,29 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
       removeNode = null;
     }
     else if(removeNode.right != null && removeNode.left != null){
-      // 자식이 두개 다있다.
-      // ...?
+
       Node<E> parent = removeNode.parent;
-      Node<E> child = removeNode.right;
+      Node<E> replaceNode = getRightLeftestNode(removeNode);
+      //System.out.println(replaceNode.element);
+
       if(parent.left == removeNode){
-        parent.left = child;
-        child.left = removeNode.right;
+        parent.left = replaceNode;
+        replaceNode.left = removeNode.left;
+        if(replaceNode.right == null){
+          if(replaceNode != removeNode.right)
+            replaceNode.right = removeNode.right;
+        }
+        replaceNode.parent.left = null;
       }else if(parent.right == removeNode){
-        parent.right = child;
-        child.left = removeNode.right;
+        parent.right = replaceNode;
+        replaceNode.left = removeNode.left;
+        // 대신할 노드에 왼쪽은 항상 없지만 오른쪽은 있을수도 있다.
+        if(replaceNode.right == null){
+          // 삭제할 노드에 오른쪽 노드가 대신할노드랑 같으면 서로 참조하게됨
+          if(replaceNode != removeNode.right)
+            replaceNode.right = removeNode.right;
+        }
+        replaceNode.parent.left = null;
       }
       removeNode = null;
     }

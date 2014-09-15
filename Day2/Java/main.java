@@ -56,6 +56,7 @@ public class main{
       }
     }
     System.out.println("---------바이너리 서치 트리------------");
+    /*
     BinarySearchTree<Nexters> bst = new BinarySearchTree<Nexters>();
 
     bst.add(new Nexters("MOK",27));
@@ -65,9 +66,24 @@ public class main{
     bst.add(new Nexters("GYUTAE",26));
     bst.add(new Nexters("WHO",33));
     bst.print();
+    */
+    BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
+    bst.add(new Integer(10));
+    bst.add(new Integer(15));
+    bst.add(new Integer(9));
+    bst.add(new Integer(5));
+    bst.add(new Integer(8));
+    bst.add(new Integer(4));
+    bst.add(new Integer(14));
+    bst.add(new Integer(18));
+    bst.add(new Integer(22));
+    bst.add(new Integer(21));
+    bst.add(new Integer(16));
+    bst.add(new Integer(23));
 
-    //bst.remove(new Nexters("JAEYOUNG",28));
-    //bst.print();
+    bst.print();
+    bst.remove(new Integer(18));
+    bst.print();
   }
 }
 
