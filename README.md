@@ -2,12 +2,13 @@
 
 ### 일정
 - Day0 : Big-O, N-P
-- Day1 : LinkedList, ArrayList, Stack, Queue, Tree(기본)
-- Day2 : Day1 응용, TREE 고급 ?
-- Day3 : TREE 응용, GRAPH 고급 ?
-- Day4 : GRAPH 응용, 암호화 압축?
-- Day5 : ETC
-- Day6 : 알고리즘 문제 풀어보기 (각자 공부하는 싸이트, 방법)
+- Day1 : [LinkedList, ArrayList, Stack, Queue](./tree/master/Day1)
+- Day2 : [Binary Tree, Binary SearchTree](./tree/master/Day2)
+- Day3 : [AVL Tree, Red-Black TREEE](./tree/master/Day3)
+- Day4 : HEAP, Priority Queue
+- Day5 : GRAPH
+- Day6 : ....
+- Day7 : 알고리즘 문제 풀어보기 (각자 공부하는 싸이트, 방법)
 
 ### 나의 목적
 - 자료구조
