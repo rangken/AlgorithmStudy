@@ -2,9 +2,9 @@
 
 ### 일정
 - Day0 : Big-O, N-P
-- Day1 : [LinkedList, ArrayList, Stack, Queue](./tree/master/Day1)
-- Day2 : [Binary Tree, Binary SearchTree](./tree/master/Day2)
-- Day3 : [AVL Tree, Red-Black TREEE](./tree/master/Day3)
+- Day1 : [LinkedList, ArrayList, Stack, Queue](https://github.com/rangken/AlgorithmStudy/tree/master/Day1)
+- Day2 : [Binary Tree, Binary SearchTree](https://github.com/rangken/AlgorithmStudy/tree/master/Day2)
+- Day3 : [AVL Tree, Red-Black TREEE](https://github.com/rangken/AlgorithmStudy/tree/master/Day3)
 - Day4 : HEAP, Priority Queue
 - Day5 : GRAPH
 - Day6 : ....
