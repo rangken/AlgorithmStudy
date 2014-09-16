@@ -77,13 +77,16 @@ public class main{
     bst.add(new Integer(14));
     bst.add(new Integer(18));
     bst.add(new Integer(22));
-    bst.add(new Integer(21));
-    bst.add(new Integer(16));
+    //bst.add(new Integer(21));
+    //bst.add(new Integer(16));
     bst.add(new Integer(23));
 
     bst.print();
-    System.out.println("제거");
-    bst.remove(new Integer(18));
+    //System.out.println("제거");
+    //bst.remove(new Integer(18));
+    //bst.print();
+
+    bst.rotateLeft(bst.getNode(new Integer(5)));
     bst.print();
   }
 }

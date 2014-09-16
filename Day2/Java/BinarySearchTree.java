@@ -1,9 +1,11 @@
 public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> implements ITree<E>{
-
+   protected enum Position {
+      LEFT, RIGHT
+  };
   public BinarySearchTree(){
 
   }
-  protected Node<E> getNode(E data){
+  public Node<E> getNode(E data){
     Node<E> node = root;
     while(node != null){
       if(data.compareTo(node.element) == 0){
@@ -16,8 +18,8 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     }
     return null;
   }
-  protected Node<E> getRightLeftestNode(Node<E> node){
-    Node<E> tNode = node.right;
+  protected Node<E> getLeafLeftNode(Node<E> node){
+    Node<E> tNode = node;
     if(tNode == null)
       return tNode;
     while(tNode.left != null){
@@ -118,7 +120,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     else if(removeNode.right != null && removeNode.left != null){
 
       Node<E> parent = removeNode.parent;
-      Node<E> replaceNode = getRightLeftestNode(removeNode);
+      Node<E> replaceNode = getLeafLeftNode(removeNode.right);
       //System.out.println(replaceNode.element);
 
       if(parent.left == removeNode){
@@ -144,5 +146,73 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     }
 
     return data;
+  }
+  /*
+    \
+     \
+      \
+  */
+  public void rotateRight(Node<E> node){
+    Node<E> parent = node.parent;
+    Position parentPosition = null;
+    if(parent != null){
+      if(node.equals(parent.left)){
+        parentPosition = Position.LEFT;
+      }else{
+        parentPosition = Position.RIGHT;
+      }
+    }
+    Node<E> greater = node.right;
+    Node<E> lesser = greater.left;
+    node.right = null;
+    greater.left = node;
+    node.parent = greater;
+    node.right = lesser;
+    if(lesser != null)
+      lesser.parent = node;
+
+    if(parentPosition != null){
+      if(parentPosition == Position.LEFT){
+        parent.left = greater;
+      }else{
+        parent.right = greater;
+      }
+      greater.parent = parent;
+    }else{
+      root = greater;
+      greater.parent = null;
+    }
+  }
+
+  public void rotateLeft(Node<E> node){
+    Node<E> parent = node.parent;
+    Position parentPosition = null;
+    if(parent != null){
+      if(node.equals(parent.left)){
+        parentPosition = Position.LEFT;
+      }else{
+        parentPosition = Position.RIGHT;
+      }
+    }
+    Node<E> lesser = node.left;
+    Node<E> greater = lesser.right;
+    node.left = null;
+    lesser.right = node;
+    node.parent = lesser;
+    node.left = greater;
+    if(greater != null)
+      greater.parent = node;
+
+    if(parentPosition != null){
+      if(parentPosition == Position.LEFT){
+        parent.left = lesser;
+      }else{
+        parent.right = lesser;
+      }
+      lesser.parent = parent;
+    }else{
+      root = lesser;
+      lesser.parent = null;
+    }
   }
 }
