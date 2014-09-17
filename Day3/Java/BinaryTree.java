@@ -4,9 +4,12 @@ public class BinaryTree<E>{
 
   protected int size = 0;
 
+  protected INodeCreator creator = null;
+
   public BinaryTree(){
     root = null;
   }
+
   final public void insertLeft(E data, Node<E> node){
     if(node.left != null){
         System.out.println("왼쪽 노드가 이미 차있음");
@@ -61,23 +64,28 @@ public class BinaryTree<E>{
     public Node<E> parent;
     public Node<E> left;
     public Node<E> right;
+
     public Node(){
         this.left = null;
         this.right = null;
     }
-    public Node(E _element){
-        this.element = _element;
+    public Node(E element){
+        this.element = element;
         this.left = null;
         this.right = null;
     }
-    public Node(E _element,Node<E> parent){
+    public Node(E element,Node<E> parent){
         this.parent = parent;
-        this.element = _element;
+        this.element = element;
         this.left = null;
         this.right = null;
     }
     public void visit(){
         System.out.print(element);
     }
+
+  }
+  protected static interface INodeCreator<E extends Comparable<E>> {
+      public Node<E> createNewNode(E id,Node<E> parent);
   }
 }

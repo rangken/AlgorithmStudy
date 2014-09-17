@@ -27,9 +27,16 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     }
     return tNode;
   }
+
+  @SuppressWarnings("unchecked")
   @Override
   public boolean add(E data){
-    Node<E> newNode = new Node<E>(data);
+    Node<E> newNode = null;
+    if(this.creator == null)
+      newNode = new Node<E>(data);
+    else
+      newNode = this.creator.createNewNode(data, null);
+
     if(root == null){
       root = newNode;
       root.parent = null;
@@ -60,25 +67,33 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     }
     return true;
   }
-  public boolean add2(E data){
-    Node<E> newNode = new Node<E>(data);
+
+  @SuppressWarnings("unchecked")
+  protected Node<E> addRecursive(E data){
+    Node<E> newNode = null;
+    if(this.creator == null)
+      newNode = new Node<E>(data);
+    else
+      newNode = this.creator.createNewNode(data, null);
     if(root == null){
       root = newNode;
       root.parent = null;
     }
     insertNode(root, newNode);
-    return true;
+    return newNode;
   }
   // recursive add
   private Node<E> insertNode(Node<E> currentParent, Node<E> newNode) {
-
     if (currentParent == null)
       return newNode;
-
-    else if (newNode.element.compareTo(currentParent.element) > 0)
+    else if (newNode.element.compareTo(currentParent.element) > 0){
       currentParent.right = insertNode(currentParent.right, newNode);
-    else if (newNode.element.compareTo(currentParent.element) < 0 )
+      currentParent.right.parent = currentParent;
+    }
+    else if (newNode.element.compareTo(currentParent.element) < 0 ){
       currentParent.left = insertNode(currentParent.left, newNode);
+      currentParent.left.parent = currentParent;
+    }
 
     return currentParent;
   }
@@ -147,12 +162,9 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
 
     return data;
   }
-  /*
-    \
-     \
-      \
-  */
+
   public void rotateRight(Node<E> node){
+    System.out.println("ROTATE RIGHT AT " + node);
     Node<E> parent = node.parent;
     Position parentPosition = null;
     if(parent != null){
@@ -185,6 +197,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
   }
 
   public void rotateLeft(Node<E> node){
+    System.out.println("ROTATE LEFT AT " + node);
     Node<E> parent = node.parent;
     Position parentPosition = null;
     if(parent != null){

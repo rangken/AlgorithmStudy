@@ -5,7 +5,7 @@
 3. RED-BLACK 이용한 TREEMAP Collection 구현
 4. TREE 를 이용한 산술
 
-### 더 해야할것
+### TODO
 
 ### 이론
 #### 회전
@@ -41,3 +41,8 @@
 >         /      /      \      \
 >        /       \      /       \
 >       <LL>    <LR>   <RL>     <R>
+
+
+### 이야기하면 좋은 내용
+- Downcasting
+- @SuppressWarnings("unchecked")
