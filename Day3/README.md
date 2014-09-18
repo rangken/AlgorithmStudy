@@ -35,29 +35,41 @@
 
 
 #### AVL
-- X 의 왼쪽 자식의 왼쪽 부속트리에 노드가 삽입된 경우 (LL)
-  - ROTATE_LEFT(X)
-![AVL 회전 LL](../Resource/img/Tree-Rotate-LL.png?raw=true)
-
-- X 의 왼쪽 자식의 오른쪽 부속트리에 도드가 삽입된 경우(LR)
-  - ROTATE_LEFT(X.LEFT) -> ROTATE_RIGHT(X)
-![AVL 회전 LR](../Resource/img/Tree-Rotate-LR.png?raw=true)
-
-- X 의 오른쪽 자식의 왼쪽 부속트리에 노드가 삽입된 경우(RL)
-  - ROTATE_RIGHT(X.RIGHT) -> ROTATE_LEFT(X)
-![AVL 회전 RL](../Resource/img/Tree-Rotate-RL.png?raw=true)
-
-- X 의 오른쪽 자식의 오른쪽 부속트리에 노드가 삽입된 경우(RR)
-  - ROTATE_RIGHT(X)
-![AVL 회전 RR](../Resource/img/Tree-Rotate-RR.png?raw=true)
+- 회전 정리
 
 >         /      /      \      \
 >        /       \      /       \
 >       <LL>    <LR>   <RL>     <R>
 
+- X 의 왼쪽 자식의 왼쪽 부속트리에 노드가 삽입된 경우 (LL)
+  - ROTATE_LEFT(X)
+
+![AVL 회전 LL](../Resource/img/Tree-Rotate-LL.png?raw=true)
+
+- X 의 왼쪽 자식의 오른쪽 부속트리에 도드가 삽입된 경우(LR)
+  - ROTATE_LEFT(X.LEFT) -> ROTATE_RIGHT(X)
+
+![AVL 회전 LR](../Resource/img/Tree-Rotate-LR.png?raw=true)
+
+- X 의 오른쪽 자식의 왼쪽 부속트리에 노드가 삽입된 경우(RL)
+  - ROTATE_RIGHT(X.RIGHT) -> ROTATE_LEFT(X)
+
+![AVL 회전 RL](../Resource/img/Tree-Rotate-RL.png?raw=true)
+
+- X 의 오른쪽 자식의 오른쪽 부속트리에 노드가 삽입된 경우(RR)
+  - ROTATE_RIGHT(X)
+
+![AVL 회전 RR](../Resource/img/Tree-Rotate-RR.png?raw=true)
+
 
 #### Red-Black Tree
 ![Red-Black Tree](../Resource/img/Red-Black-Tree1.png?raw=true)
+- 조건
+	- 1.노드는 레드 혹은 블랙 중의 하나이다.
+	- 2. 루트 노드(시작점)은 블랙이다.
+	- 3.모든 leaf node는 블랙이다.
+	- 4.레드 노드의 자식노드 양쪽은 언제나 모두 블랙이다. 그러므로 블랙 노드만이 레드 노드의 부모 노드가 될 수 있다.
+	- 5.어떤 노드로부터 시작되어 leaf node에 도달하는 모든 경로에는 leaf node를 제외하면 모두 같은 개수의 블랙 노드가 있다.
 
 ### 심화내용
 - Segment Tree
@@ -70,6 +82,7 @@
 - IntervalTree
 - Trie
   - String 을 정렬해서 트리에 저장
+  
 ### 이야기하면 좋은 내용
 - Downcasting
 - @SuppressWarnings("unchecked")
