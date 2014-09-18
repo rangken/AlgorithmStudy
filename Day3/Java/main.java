@@ -15,6 +15,8 @@ public class main{
     avlt.add(new Integer(22));
     avlt.print();
     System.out.println("삭제");
+    avlt.remove(new Integer(5));
+    avlt.print();
   }
 }
 

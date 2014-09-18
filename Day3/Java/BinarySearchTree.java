@@ -69,7 +69,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
   }
 
   @SuppressWarnings("unchecked")
-  protected Node<E> addRecursive(E data){
+  protected Node<E> addAndGetNode(E data){
     Node<E> newNode = null;
     if(this.creator == null)
       newNode = new Node<E>(data);
@@ -99,6 +99,107 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
   }
   @Override
   public E remove(E data){
+    Node<E> removeNode = getNode(data);
+    Node<E> replaceNode = getReplacementNode(removeNode);
+    replaceNodeWithNode(removeNode, replaceNode);
+    return data;
+  }
+  public Node<E> removeAndGetNode(E data){
+    Node<E> removeNode = getNode(data);
+    if(removeNode != null){
+      Node<E> replaceNode = getReplacementNode(removeNode);
+      replaceNodeWithNode(removeNode, replaceNode);
+    }
+    return removeNode;
+  }
+  protected Node<E> getReplacementNode(Node<E> nodeToRemoved) {
+    Node<E> replaceNode = null;
+    if(nodeToRemoved.left != null && nodeToRemoved.right == null){
+      replaceNode = nodeToRemoved.left;
+    }else if(nodeToRemoved.right != null && nodeToRemoved.left == null){
+      replaceNode = nodeToRemoved.right;
+    }else if(nodeToRemoved.left != null && nodeToRemoved.right != null){
+      // 오른쪽 노드에서 가장 왼쪽에 있는 노드를 찾는다.
+      // 왼쪽 노드에서 가장 오른쪽에 있는 노드를 찾아도 된다.
+      replaceNode = getLeafLeftNode(nodeToRemoved.right);
+      if(replaceNode == null){
+        // 삭제할 노드에 오른쪽 노드가 왼쪽 노드가 없다면
+        // 그냥 오른쪽 노드로 대신함
+        replaceNode = nodeToRemoved.right;
+      }
+    }
+    return replaceNode;
+  }
+  protected void replaceNodeWithNode(Node<E> nodeToRemoved, Node<E> replacementNode) {
+    // leaf 노드를 삭제한다면 replacementNode 가 null 일수도 있다.
+    if(replacementNode != null){
+      // 대체 할 노드의 오른쪽 왼쪽을 바꾸기 전에 미리 저장해 놓는다. 처음에 대체할 노드의 오른쪽 왼쪽부터 바꾼다.
+      // 1.왼쪽에 가장 오른쪽을 선택했을경우 데체할 노드의 왼쪽 자식은 있을수도 있다.
+      Node<E> replacementNodeLeft = replacementNode.left;
+      // 2.오른쪽에 가징왼쪽을 선택했을경우 대체할 노드의 오른쪽 자식은 있을수도 있다.
+      Node<E> replacementNodeRight = replacementNode.right;
+
+      // 대체할 노드 <-> 삭제할 노드의 양쪽 자식
+      // ** 삭제할 노드와 대체할노드가 바로 붙어 있다면 삭제할 노드의 부모를 대체할노드로 바꿔주기만하면됨**
+      // 삭제할 노드에 양쪽 자식을 대체할 노드에 넣어준다.
+      Node<E> nodeToRemoveLeft = nodeToRemoved.left;
+      // 삭제할 노드의 왼쪽이 있다면, **근데 삭제할노드의 왼쪽이 대체할노드가 아니라면**
+      if(nodeToRemoveLeft != null && !nodeToRemoveLeft.equals(replacementNode)){
+        replacementNode.left = nodeToRemoveLeft;
+        nodeToRemoveLeft.parent = replacementNode;
+      }
+      Node<E> nodeToRemoveRight = nodeToRemoved.right;
+      // 삭제할 노드의 오른쪽이 있다면, **근데 삭제할 노드의 오른쪽이 대체할 노드가 아니라면**
+      if(nodeToRemoveRight != null && !nodeToRemoveRight.equals(replacementNode)){
+        replacementNode.right = nodeToRemoveRight;
+        nodeToRemoveRight.parent = replacementNode;
+      }
+
+      // 대체할 노드의 부모 <-> 대체할 노드의 자식 (대체할 노드가 빠지므로)
+      // 삭제할 노드의 오른쪽 노드의 맨왼쪽 노드(대체할노드) 의 오른쪽 자식은 있을수도 있다.
+
+      Node<E> replacementParent = replacementNode.parent;
+      // 대체할 노드의 부모가 있고, **대체할 노드의 부모가 삭제할것은 아니라면**
+      if(replacementParent != null && !replacementParent.equals(nodeToRemoved)){
+        // 대체할 노드가 부모의 왼쪽이라면(1.오른쪽에서 가장 왼쪽을 선택했을경우)
+        if(replacementParent.left != null && replacementParent.left.equals(replacementNode)){
+          // 대체할 노드의 오른쪽을 대체할 노드의 부모의 왼쪽으로 연결해준다.
+          replacementParent.left = replacementNodeRight;
+          if(replacementNodeRight != null){
+            // 만약 대체노드의 오른쪽이 자식이 있다면 대체할 노드의 오른쪽의 부모를 대체할 노드의 부모로
+            replacementNodeRight.parent = replacementParent;
+          }
+        }else if(replacementParent.right != null && replacementParent.right.equals(replacementNode)){
+          // 1.삭제할 노드의 오른쪽의 가징 왼쪽 선택했으므로 대체할 노드의 부모의 오른쪽에 있을일이 없다.
+          replacementParent.right = replacementNodeLeft;
+          if(replacementNodeLeft != null){
+            replacementNodeLeft.parent = replacementParent;
+          }
+        }
+      }
+    }
+    // 삭제할 노드의 부모 <-> 대체 노드
+    Node<E> parent = nodeToRemoved.parent;
+    if(parent == null){
+      // 삭제할 노드가 루트 노드
+      root = replacementNode;
+      if(root != null)
+        root.parent = null;
+    }else if(parent.left != null && parent.left.equals(nodeToRemoved)){
+      // 삭제할노드가 부모의 왼쪽 이라면
+      parent.left = replacementNode;
+      if(replacementNode != null)
+        replacementNode.parent = parent;
+
+    }else if(parent.right != null && parent.right.equals(nodeToRemoved)){
+      // 삭제할노드가 부모의 오른쪽 이라면
+      parent.right = replacementNode;
+      if(replacementNode != null)
+        replacementNode.parent = parent;
+    }
+  }
+
+  public E remove2(E data){
     Node<E> removeNode = getNode(data);
     if(removeNode.left == null && removeNode.right == null){
       // leaf node
@@ -135,11 +236,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     else if(removeNode.right != null && removeNode.left != null){
 
       Node<E> parent = removeNode.parent;
-      // 대신할 노드는 오른쪽에 가장 작은걸 가져오거나 왼쪽에 가장 큰걸 가져오면된다.
       Node<E> replaceNode = getLeafLeftNode(removeNode.right);
-      if(replaceNode == null){
-        replaceNode = removeNode.right
-      }
       //System.out.println(replaceNode.element);
 
       if(parent.left == removeNode){
@@ -201,7 +298,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
   }
 
   public void rotateRight(Node<E> node){
-    System.out.println("ROTATE Right AT " + node);
+    System.out.println("ROTATE RIGHT AT " + node);
     Node<E> parent = node.parent;
     Position parentPosition = null;
     if(parent != null){
