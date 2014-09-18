@@ -135,7 +135,11 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     else if(removeNode.right != null && removeNode.left != null){
 
       Node<E> parent = removeNode.parent;
+      // 대신할 노드는 오른쪽에 가장 작은걸 가져오거나 왼쪽에 가장 큰걸 가져오면된다.
       Node<E> replaceNode = getLeafLeftNode(removeNode.right);
+      if(replaceNode == null){
+        replaceNode = removeNode.right
+      }
       //System.out.println(replaceNode.element);
 
       if(parent.left == removeNode){
@@ -163,8 +167,8 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     return data;
   }
 
-  public void rotateRight(Node<E> node){
-    System.out.println("ROTATE RIGHT AT " + node);
+  public void rotateLeft(Node<E> node){
+    System.out.println("ROTATE LEFT AT " + node);
     Node<E> parent = node.parent;
     Position parentPosition = null;
     if(parent != null){
@@ -196,8 +200,8 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> imp
     }
   }
 
-  public void rotateLeft(Node<E> node){
-    System.out.println("ROTATE LEFT AT " + node);
+  public void rotateRight(Node<E> node){
+    System.out.println("ROTATE Right AT " + node);
     Node<E> parent = node.parent;
     Position parentPosition = null;
     if(parent != null){

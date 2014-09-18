@@ -65,20 +65,20 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> implem
       print();
       if(balnace == Balance.LEFT_LEFT){
         System.out.println("LL");
-        rotateLeft(node);
+        rotateRight(node);
       }else if(balnace == Balance.LEFT_RIGHT){
         System.out.println("LR");
-        rotateRight(parent);
+        rotateLeft(parent);
         print();
-        rotateLeft(node);
+        rotateRight(node);
         print();
       }else if(balnace == Balance.RIGHT_LEFT){
         System.out.println("RL");
-        rotateLeft(parent);
-        rotateRight(node);
+        rotateRight(parent);
+        rotateLeft(node);
       }else if(balnace == Balance.RIGHT_RIGHT){
         System.out.println("RR");
-        rotateRight(node);
+        rotateLeft(node);
       }
       print();
       node.updateHeight();
