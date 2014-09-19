@@ -1,30 +1,71 @@
-rm -rf *.class
-javac main.java && java main
----------바이너리 트리------------
-       1
+---------AVL TREE------------
+   50
+  /
+ /
+ 10
+  \
+  25
+
+LR
+ROTATE LEFT AT element : 10 : height : 2 balanceFactor : 1
+   50
+  /
+ /
+ 25
+/
+10
+
+ROTATE RIGHT AT element : 50 : height : 3 balanceFactor : -1
+ 25
+/ \
+10 50
+
+ 25
+/ \
+10 50
+
+       25
       / \
      /   \
     /     \
    /       \
-   2       3
-  / \     /
- /   \   /
- 4   5   6
-        /
-        7
+   10       50
+  /         \
+ /           \
+ 5           55
+  \
+  6
 
-전위 순회
-1 2 4 5 3 6 7
-중위 순회
-4 2 5 1 7 6 3
-후위 순회
-4 5 2 7 6 3 1
-레벨 순회
-1 2 3 4 5 6 7
-BFS
-1 2 4 5 3 6 7
----------바이너리 서치 트리------------
-               10
+LR
+ROTATE LEFT AT element : 5 : height : 2 balanceFactor : 1
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   10       50
+  /         \
+ /           \
+ 6           55
+/
+5
+
+ROTATE RIGHT AT element : 10 : height : 3 balanceFactor : -1
+   25
+  / \
+ /   \
+ 6   50
+/ \   \
+5 10   55
+
+   25
+  / \
+ /   \
+ 6   50
+/ \   \
+5 10   55
+
+               25
               / \
              /   \
             /     \
@@ -33,19 +74,77 @@ BFS
          /           \
         /             \
        /               \
-       9               15
-      /               / \
-     /               /   \
-    /               /     \
-   /               /       \
-   5               14       18
-  / \                     / \
- /   \                   /   \
- 4   8                   16   22
-                            / \
-                            21 23
+       6               50
+      / \               \
+     /   \               \
+    /     \               \
+   /       \               \
+   5       10               55
+            \
+             \
+             18
+              \
+              22
 
-               10
+RR
+ROTATE LEFT AT element : 10 : height : 3 balanceFactor : 2
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   6       50
+  / \       \
+ /   \       \
+ 5   18       55
+    / \
+    10 22
+
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   6       50
+  / \       \
+ /   \       \
+ 5   18       55
+    / \
+    10 22
+
+REOMOVE 50
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   6       55
+  / \
+ /   \
+ 5   18
+    / \
+    10 22
+
+REOMOVE 6
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   10       55
+  / \
+ /   \
+ 5   18
+      \
+      22
+
+---------RED-BLLACK TREE------------
+ROTATE LEFT AT element : 10 : COLOR : RED
+ROTATE RIGHT AT element : 50 : COLOR : RED
+ROTATE RIGHT AT element : 10 : COLOR : RED
+ROTATE LEFT AT element : 6 : COLOR : RED
+ROTATE RIGHT AT element : 10 : COLOR : RED
+               25
               / \
              /   \
             /     \
@@ -54,15 +153,14 @@ BFS
          /           \
         /             \
        /               \
-       9               15
-      /               / \
-     /               /   \
-    /               /     \
-   /               /       \
-   5               14       21
-  / \                     / \
- /   \                   /   \
- 4   8                   16   22
-                              \
-                              23
-
+       5               50
+      / \             / \
+     /   \           /   \
+    /     \         /     \
+   /       \       /       \
+   5       10       null       null
+  / \     / \
+ /   \   /   \
+ null   null   6   10
+        / \ / \
+        null null null null

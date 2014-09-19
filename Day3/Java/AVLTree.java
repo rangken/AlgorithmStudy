@@ -39,6 +39,8 @@ public class AVLTree<E extends Comparable<E>> extends BinarySearchTree<E> implem
       if (nodeToRefactor != null && nodeToRefactor.equals(nodeToRemoved))
           nodeToRefactor = (AVLNode<E>) replacementNode;
 
+      replaceNodeWithNode(nodeToRemoved, replacementNode);
+
       if (nodeToRefactor != null) {
             while (nodeToRefactor != null) {
                 nodeToRefactor.updateHeight();
