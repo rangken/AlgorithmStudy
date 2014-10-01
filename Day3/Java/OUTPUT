@@ -1,0 +1,166 @@
+---------AVL TREE------------
+   50
+  /
+ /
+ 10
+  \
+  25
+
+LR
+ROTATE LEFT AT element : 10 : height : 2 balanceFactor : 1
+   50
+  /
+ /
+ 25
+/
+10
+
+ROTATE RIGHT AT element : 50 : height : 3 balanceFactor : -1
+ 25
+/ \
+10 50
+
+ 25
+/ \
+10 50
+
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   10       50
+  /         \
+ /           \
+ 5           55
+  \
+  6
+
+LR
+ROTATE LEFT AT element : 5 : height : 2 balanceFactor : 1
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   10       50
+  /         \
+ /           \
+ 6           55
+/
+5
+
+ROTATE RIGHT AT element : 10 : height : 3 balanceFactor : -1
+   25
+  / \
+ /   \
+ 6   50
+/ \   \
+5 10   55
+
+   25
+  / \
+ /   \
+ 6   50
+/ \   \
+5 10   55
+
+               25
+              / \
+             /   \
+            /     \
+           /       \
+          /         \
+         /           \
+        /             \
+       /               \
+       6               50
+      / \               \
+     /   \               \
+    /     \               \
+   /       \               \
+   5       10               55
+            \
+             \
+             18
+              \
+              22
+
+RR
+ROTATE LEFT AT element : 10 : height : 3 balanceFactor : 2
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   6       50
+  / \       \
+ /   \       \
+ 5   18       55
+    / \
+    10 22
+
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   6       50
+  / \       \
+ /   \       \
+ 5   18       55
+    / \
+    10 22
+
+REOMOVE 50
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   6       55
+  / \
+ /   \
+ 5   18
+    / \
+    10 22
+
+REOMOVE 6
+       25
+      / \
+     /   \
+    /     \
+   /       \
+   10       55
+  / \
+ /   \
+ 5   18
+      \
+      22
+
+---------RED-BLLACK TREE------------
+ROTATE LEFT AT element : 10 : COLOR : RED
+ROTATE RIGHT AT element : 50 : COLOR : RED
+ROTATE RIGHT AT element : 10 : COLOR : RED
+ROTATE LEFT AT element : 6 : COLOR : RED
+ROTATE RIGHT AT element : 10 : COLOR : RED
+               25
+              / \
+             /   \
+            /     \
+           /       \
+          /         \
+         /           \
+        /             \
+       /               \
+       5               50
+      / \             / \
+     /   \           /   \
+    /     \         /     \
+   /       \       /       \
+   5       10       null       null
+  / \     / \
+ /   \   /   \
+ null   null   6   10
+        / \ / \
+        null null null null
